@@ -15,13 +15,12 @@ import {
 import { uploadFieldImage } from '../../middlewares/file-uploader.js';
 import { cleanupUploadedFileOnFinish } from '../../middlewares/delete-file-on-error.js';
 import { requireRole } from '../../middlewares/validate-role.js';
-import { authOrInternal } from '../../middlewares/validate-internal-token.js';
 
 const router = Router();
 
-// Rutas GET - Consumibles tanto por el frontend como por otros microservicios
-router.get('/', authOrInternal, getFields);
-router.get('/:id', authOrInternal, validateGetFieldById, getFieldById);
+// Rutas GET - Accesibles públicamente
+router.get('/', getFields);
+router.get('/:id', validateGetFieldById, getFieldById);
 
 // Rutas POST - Solo para administradores
 router.post(
